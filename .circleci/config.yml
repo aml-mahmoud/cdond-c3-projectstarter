@@ -42,29 +42,29 @@ jobs:
     docker:
       circleci/node:13.8.0
     steps:
-      # Checkout code from git
       - checkout
-      # Restore from cache
       - restore_cache:
           keys: [frontend-build]
-      # Your job code here
-      cd frontend
-      npm install
-      npm run test
-                
+      - run:
+          name: front-end te!Split 
+          command: |
+            cd frontend
+            npm install
+            npm run test         
   test-backend:
     docker:
       circleci/node:13.8.0
     steps:
-      # Checkout code from git
       - checkout     
-      # Restore from cache
       - restore_cache:
           keys: [backend-build]
-      # Your job code here  
-      cd backend
-      npm install
-      npm run test      
+      - run:
+          name: backend test
+          command: |
+            cd backend
+            npm install
+            npm run test 
+                   
 workflows:
   default:
     jobs:
