@@ -110,11 +110,20 @@ jobs:
             # npm install oauth-sign@^0.9.0
             npm audit fix --audit-level=critical --force
             npm audit fix --audit-level=critical --force
-            npm audit --audit-level=critical
+            #npm audit --audit-level=critical
             # npm audit fix --audit-level=critical --force
             # # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-      - notify_on_fail      
+      - notify_on_fail    
+  notify_on_success:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+       - slack/notify:
+          event: success
+          channel: project
+          template: success_tagged_deployment_1
+          
              
 workflows:
   default:
@@ -133,3 +142,9 @@ workflows:
       - scan-backend:
           requires:
             - build-backend
+      - notify_on_success:
+          requires:
+            - build-frontend
+            - build-backend
+            - test-backend
+            - test-frontend
