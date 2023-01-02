@@ -120,7 +120,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - slack/notify:
-          event: success
+          event: pass
           channel: project
           template: success_tagged_deployment_1
           
