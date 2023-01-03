@@ -136,8 +136,7 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      # Docker image here that supports AWS CLI
-      image: amazon/aws-cli:latest
+      - image: amazon/aws-cli:latest
     steps:
       # Checkout code from git
       - checkout
