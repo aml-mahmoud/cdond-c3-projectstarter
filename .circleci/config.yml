@@ -25,6 +25,7 @@ commands:
       - run:
           name: install ansible
           command:
+            yum install epel-release -y 
             yum install -y ansible
   
   destroy-environment:
