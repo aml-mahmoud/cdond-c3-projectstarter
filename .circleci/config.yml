@@ -26,10 +26,11 @@ commands:
           name: install ansible
           command:
             yum update
-            yum install software-properties-common
-            yum-add-repository ppa:ansible/ansible
+            amazon-linux-extras list | grep ansible2
+            amazon-linux-extras enable ansible2
             yum update
-            yum install ansible 
+            yum install -y ansible
+            ansible --version
   
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -218,7 +219,7 @@ jobs:
           command: |
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
-
+      - destroy-environment 
       # Here's where you will add some code to rollback on failure             
           
              
