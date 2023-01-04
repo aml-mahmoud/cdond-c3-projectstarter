@@ -203,4 +203,10 @@ workflows:
             - build-backend
             - test-backend
             - test-frontend
-      - deploy-infrastructure      
+      - deploy-infrastructure:
+          requires: [build-frontend, build-backend, test-backend, test-frontend, scan-frontend, scan-backend]
+          filters:
+             branches:
+               only: [master]
+               
+            
