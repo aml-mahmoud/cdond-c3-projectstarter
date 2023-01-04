@@ -19,7 +19,11 @@ commands:
       - run:
           name: install ansible
           command:
-             yum install -y ansible
+            yum update
+            yum install software-properties-common
+            yum-add-repository ppa:ansible/ansible
+            yum update
+            yum install ansible 
   
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
