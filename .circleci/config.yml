@@ -147,6 +147,7 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
+      - install_tar  
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -175,7 +176,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment 
-      - install_tar       
+          
       # Here's where you will add some code to rollback on failure          
           
              
