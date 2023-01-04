@@ -195,6 +195,7 @@ jobs:
     steps:
       - checkout
       - install_ansible
+      - install_tar
       - add_ssh_keys:
           fingerprints: ["de:f8:e0:a5:d7:16:50:8e:bf:2c:4d:07:ed:93:66:e6"]
       - attach_workspace:
