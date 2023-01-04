@@ -8,6 +8,12 @@ commands:
           event: fail
           channel: project
           template: basic_fail_1
+  install_tar:
+    steps:
+      - run:
+          name: Install tar utility
+          command: |
+            yum install -y tar gzip        
   
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -124,7 +130,8 @@ jobs:
             # npm audit fix --audit-level=critical --force
             # # If the "npm audit fix" command above could not fix all critical vulnerabilities, try “npm audit fix --force” again
             # npm audit --audit-level=critical
-      - notify_on_fail    
+      - notify_on_fail  
+      
   notify_on_success:
     docker:
       - image: circleci/node:13.8.0
@@ -167,7 +174,8 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      - destroy-environment      
+      - destroy-environment 
+      - install_tar       
       # Here's where you will add some code to rollback on failure          
           
              
