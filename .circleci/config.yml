@@ -14,6 +14,12 @@ commands:
           name: Install tar utility
           command: |
             yum install -y tar gzip  
+  install_python:
+    steps:
+      - run:
+          name: install python
+          command: |
+             yum install python37 -y 
   install_ansible:
     steps:
       - run:
@@ -196,6 +202,7 @@ jobs:
       - checkout
       - install_ansible
       - install_tar
+      - install_python
       - add_ssh_keys:
           fingerprints: ["de:f8:e0:a5:d7:16:50:8e:bf:2c:4d:07:ed:93:66:e6"]
       - attach_workspace:
