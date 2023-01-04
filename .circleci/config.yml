@@ -212,6 +212,7 @@ jobs:
       #     command: |
       #       # Your code here
       #       exit 1
+      #------
       - run:
           name: Configure server
           command: |
