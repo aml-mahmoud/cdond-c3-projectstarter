@@ -185,24 +185,28 @@ jobs:
       - destroy-environment 
           
       # Here's where you will add some code to rollback on failure   
-  # configure-infrastructure:
-  #   docker:
-  #     - image: amazon/aws-cli:latest
-  #   steps:
-  #     - checkout
-  #     - install_ansible
-  #     # Add ssh keys with fingerprint
-  #     # attach workspace
-  #     - run:
-  #         name: Install dependencies
-  #         command: |
-  #           # Your code here
-  #           exit 1
-  #     - run:
-  #         name: Configure server
-  #         command: |
-  #           # Your code here
-  #           exit 1
+  configure-infrastructure:
+    docker:
+      - image: amazon/aws-cli:latest
+    steps:
+      - checkout
+      - install_ansible
+      - add_ssh_keys:
+          fingerprints:
+            - ["de:f8:e0:a5:d7:16:50:8e:bf:2c:4d:07:ed:93:66:e6"]
+      - attach_workspace:
+          at: ~/
+      # - run:
+      #     name: Install dependencies
+      #     command: |
+      #       # Your code here
+      #       exit 1
+      - run:
+          name: Configure server
+          command: |
+            cd .circleci/ansible
+            ansible-playbook -i inventory.txt configure-server.yml
+
       # Here's where you will add some code to rollback on failure             
           
              
@@ -234,5 +238,7 @@ workflows:
           # filters:
           #    branches:
           #      only: [master]
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]    
 
             
