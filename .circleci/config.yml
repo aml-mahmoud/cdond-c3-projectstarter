@@ -130,7 +130,7 @@ jobs:
             cd backend
             npm install
             # npm install oauth-sign@^0.9.0
-            npm audit fix --audit-level=critical --force
+            #npm audit fix --audit-level=critical --force
             npm audit fix --audit-level=critical --force
             #npm audit --audit-level=critical
             # npm audit fix --audit-level=critical --force
@@ -185,24 +185,24 @@ jobs:
       - destroy-environment 
           
       # Here's where you will add some code to rollback on failure   
-  configure-infrastructure:
-    docker:
-      - image: amazon/aws-cli:latest
-    steps:
-      - checkout
-      - install_ansible
-      # Add ssh keys with fingerprint
-      # attach workspace
-      - run:
-          name: Install dependencies
-          command: |
-            # Your code here
-            exit 1
-      - run:
-          name: Configure server
-          command: |
-            # Your code here
-            exit 1
+  # configure-infrastructure:
+  #   docker:
+  #     - image: amazon/aws-cli:latest
+  #   steps:
+  #     - checkout
+  #     - install_ansible
+  #     # Add ssh keys with fingerprint
+  #     # attach workspace
+  #     - run:
+  #         name: Install dependencies
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #     - run:
+  #         name: Configure server
+  #         command: |
+  #           # Your code here
+  #           exit 1
       # Here's where you will add some code to rollback on failure             
           
              
