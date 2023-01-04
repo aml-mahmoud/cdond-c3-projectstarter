@@ -24,7 +24,7 @@ commands:
     steps:
       - run:
           name: install ansible
-          command:
+          command: |
             yum install epel-release -y 
             yum install -y ansible
   
