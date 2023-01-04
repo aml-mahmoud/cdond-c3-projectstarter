@@ -13,7 +13,13 @@ commands:
       - run:
           name: Install tar utility
           command: |
-            yum install -y tar gzip        
+            yum install -y tar gzip  
+  install_ansible:
+    steps:
+      - run:
+          name: install ansible
+          command:
+             yum install -y ansible
   
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -178,7 +184,26 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment 
           
-      # Here's where you will add some code to rollback on failure          
+      # Here's where you will add some code to rollback on failure   
+  configure-infrastructure:
+    docker:
+      - image: amazon/aws-cli:latest
+    steps:
+      - checkout
+      - install_ansible
+      # Add ssh keys with fingerprint
+      # attach workspace
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
+      # Here's where you will add some code to rollback on failure             
           
              
 workflows:
@@ -206,8 +231,8 @@ workflows:
             - test-frontend
       - deploy-infrastructure:
           requires: [build-frontend, build-backend, test-backend, test-frontend, scan-frontend, scan-backend]
-          filters:
-             branches:
-               only: [master]
+          # filters:
+          #    branches:
+          #      only: [master]
 
             
