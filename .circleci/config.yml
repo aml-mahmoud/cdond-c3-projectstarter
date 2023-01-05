@@ -213,12 +213,27 @@ jobs:
       #------
       - run:
           name: Configure server
+          no_output_timeout: 11m
           command: |
             cd .circleci/ansible
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment 
       # Here's where you will add some code to rollback on failure             
-          
+  # run-migrations:
+  #   docker:
+  #     # Docker image here that supports NodeJS
+  #   steps:
+  #     # Checkout code from git
+  #     - run:
+  #         name: Run migrations
+  #         command: |
+  #           # Your code here
+  #           exit 1
+  #     - run:
+  #         name: Send migration results to memstash
+  #         command: |
+  #           # Your code here
+  #           exit 1        
              
 workflows:
   default:
@@ -250,5 +265,6 @@ workflows:
           #      only: [master]
       - configure-infrastructure:
           requires: [deploy-infrastructure]    
-
+      # - run-migrations:
+      #     requires: [configure-infrastructure]
             
