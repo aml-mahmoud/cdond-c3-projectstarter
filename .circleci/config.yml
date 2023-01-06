@@ -8,29 +8,30 @@ commands:
           event: fail
           channel: project
           template: basic_fail_1
+  install_aws_cli:
+    steps:
+      - run:
+          name: install aws cli 
+          command: |
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip awscliv2.zip
+            sudo ./aws/install       
   install_tar:
     steps:
       - run:
           name: Install tar utility
           command: |
-            yum install -y tar gzip  
-  install_python:
-    steps:
-      - run:
-          name: install python
-          command: |
-             pip install python37 -y 
+            apt install -y tar gzip  
   install_ansible:
     steps:
       - run:
           name: install ansible
           command: |
-            # yum install -y python3-pip 
-            # python3 -m pip install --user --upgrade pip
-            # python3 -m pip install ansible
-            apk update && apk add --no-cache musl-dev libffi-dev openssl-dev make gcc python py2-pip python-dev
-            pip install cffi
-            pip install ansible
+            sudo apt update
+            sudo apt upgrade
+            sudo apt -y install software-properties-common
+            sudo apt-add-repository ppa:ansible/ansible
+            sudo apt install ansible
   
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
@@ -160,11 +161,12 @@ jobs:
 
   deploy-infrastructure:
     docker:
-      - image: amazon/aws-cli:latest
+      - image: cimg/base:stable
     steps:
       # Checkout code from git
       - checkout
-      - install_tar  
+      - install_tar 
+      - install_aws_cli 
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -185,6 +187,7 @@ jobs:
           name: Add back-end ip to ansible inventory
           command: |
             aws ec2 describe-instances \
+              --filter "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}"
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text >> .circleci/ansible/inventory.txt
               cat .circleci/ansible/inventory.txt
@@ -198,7 +201,7 @@ jobs:
       # Here's where you will add some code to rollback on failure   
   configure-infrastructure:
     docker:
-      - image: python:3.7-alpine3.11
+      - image: cimg/base:stable
     steps:
       - checkout
       - install_ansible
@@ -255,12 +258,12 @@ workflows:
             - test-backend
             - test-frontend
       - deploy-infrastructure:
-          requires: [build-frontend, build-backend, test-backend, test-frontend, scan-frontend, scan-backend]
-          # filters:
-          #    branches:
-          #      only: [master]
-      - configure-infrastructure:
-          requires: [deploy-infrastructure]    
-      # - run-migrations:
-      #     requires: [configure-infrastructure]
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [master
+      # - configure-infrastructure:
+      #     requires: [deploy-infrastructure]    
+      # # - run-migrations:
+      # #     requires: [configure-infrastructure]
             
