@@ -165,7 +165,7 @@ jobs:
     steps:
       # Checkout code from git
       - checkout
-      - install_tar 
+      #- install_tar 
       - install_aws_cli 
       - run:
           name: Ensure back-end infrastructure exists
