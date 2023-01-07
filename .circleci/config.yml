@@ -242,9 +242,8 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix 
-            node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod
             npm audit fix --force
+            node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod
             npm install -g @angular/cli
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
