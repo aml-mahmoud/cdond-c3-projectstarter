@@ -106,6 +106,8 @@ jobs:
             cd backend
             # sudo chmod 777 /usr/local/lib/node_modules
             # npm install -g typescript
+            npm cache clean --force
+            rm -rf node_modules
             npm install
             npm audit fix --force
             npm run build
