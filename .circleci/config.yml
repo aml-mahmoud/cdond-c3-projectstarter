@@ -30,6 +30,15 @@ commands:
           name: Install Ansible
           command: |
             python3 -m pip install --user ansible
+  install_tsc:
+    description: install tsc
+    steps:
+      - run:
+          name: install tsc
+          command: |
+            curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+            sudo apt-get install -y nodejs
+            npm install -g typescript
   install_nodejs:
     description: Install Node.js 13.8.0
     steps:
@@ -84,12 +93,13 @@ jobs:
       - restore_cache:
           keys:
             - backend-build
+      - install_tsc      
       - run:
           name: Build Backend
           command: |
             cd backend
-            sudo chmod 777 /usr/local/lib/node_modules
-            npm install -g typescript
+            # sudo chmod 777 /usr/local/lib/node_modules
+            # npm install -g typescript
             npm install
             npm audit fix --force
             npm run build
