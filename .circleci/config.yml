@@ -8,14 +8,15 @@ commands:
           event: fail
           channel: project
           template: basic_fail_1
-  install_aws_cli:
+  install_awscli:
+    description: Install AWS CLI v2
     steps:
       - run:
-          name: install aws cli 
+          name: Install AWS CLI v2
           command: |
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip awscliv2.zip
-            sudo ./aws/install       
+            sudo ./aws/install     
   install_tar:
     steps:
       - run:
@@ -23,17 +24,12 @@ commands:
           command: |
             apt install -y tar gzip  
   install_ansible:
+    description: Install Ansible
     steps:
       - run:
-          name: install ansible
+          name: Install Ansible
           command: |
-            # sudo apt update
-            # sudo apt upgrade
-            # sudo apt -y install software-properties-common
-            # sudo apt-add-repository ppa:ansible/ansible
-            # sudo apt install -y ansible 
             python3 -m pip install --user ansible
-            python3 -m pip install --user ansible-core==2.12.3
 
   
   destroy-environment:
@@ -204,22 +200,22 @@ jobs:
       # Here's where you will add some code to rollback on failure   
   configure-infrastructure:
     docker:
-       - image: cimg/python:3.10
+      - image: cimg/python:3.10
     steps:
       - checkout
       - install_ansible
-      - install_aws_cli
+      - install_awscli
       - add_ssh_keys:
-          fingerprints: ["de:f8:e0:a5:d7:16:50:8e:bf:2c:4d:07:ed:93:66:e6"]
+          fingerprints: ["8c:99:17:21:a2:d7:d4:e3:de:d3:52:94:bc:10:28:23"]
       - attach_workspace:
           at: ~/
       - run:
           name: Run Configure Server Ansible play
           command: |
-            cd .circleci/ansible
-            cat inventory.txt
+              cd .circleci/ansible
+              cat inventory.txt
 
-            ansible-playbook -i inventory.txt configure-server.yml
+              ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment 
       # Here's where you will add some code to rollback on failure #            
   # run-migrations:
@@ -269,7 +265,7 @@ workflows:
           #   branches:
           #     only: [master]
       - configure-infrastructure:
-          requires: [deploy-infrastructure]    
+          requires: [deploy-infrastructure] 
       # # - run-migrations:
       # #     requires: [configure-infrastructure]
             
