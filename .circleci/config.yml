@@ -129,7 +129,8 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
-      - checkout     
+      - checkout 
+      - install_nodejs    
       - restore_cache:
           keys: [backend-build]
       - run:
