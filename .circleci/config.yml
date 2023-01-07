@@ -243,7 +243,10 @@ jobs:
             cd backend
             npm install
             npm audit fix --force
-            echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
+            sudo echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
+            sudo npm cache clean -f
+            sudo npm install -g n
+            sudo n stable 
             #node --max_old_space_size=4096 node_modules/@angular/cli/bin/ng build --prod
             #npm install -g @angular/cli
             npm run migrations > migrations_dump.txt
