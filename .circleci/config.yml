@@ -208,18 +208,18 @@ jobs:
     steps:
       - checkout
       - install_ansible
-      - install_awscli
+      - install_aws_cli
       - add_ssh_keys:
           fingerprints: ["de:f8:e0:a5:d7:16:50:8e:bf:2c:4d:07:ed:93:66:e6"]
       - attach_workspace:
           at: ~/
       - run:
-        name: Run Configure Server Ansible play
-        command: |
-          cd .circleci/ansible
-          cat inventory.txt
+          name: Run Configure Server Ansible play
+          command: |
+            cd .circleci/ansible
+            cat inventory.txt
 
-          ansible-playbook -i inventory.txt configure-server.yml
+            ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment 
       # Here's where you will add some code to rollback on failure #            
   # run-migrations:
