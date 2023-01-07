@@ -45,6 +45,14 @@ commands:
             # sudo chown -R circleci /usr/local/lib/node_modules/
             # #sudo chown -R circleci ../lib/node_modules/typescript/bin/tsc
             sudo npm install -g typescript
+  install_ts-node:
+    description: install ts_node
+    steps:
+      - run:
+          name: install ts_node
+          command: |
+             sudo npm install ts-node
+
   install_nodejs:
     description: Install Node.js 13.8.0
     steps:
@@ -259,6 +267,7 @@ jobs:
       - install_awscli
       - install_nodejs
       - install_tsc
+      - install_ts-node
       - run:
           name: Run migrations
           command: |
@@ -282,6 +291,7 @@ jobs:
               else
                 echo "No migrations are pending" 
               fi 
+      - destroy-environment           
 #   deploy-frontend:
 #     docker:
 #       # Docker image here that supports AWS CLI
