@@ -88,6 +88,7 @@ jobs:
           command: |
             cd backend
             npm install
+            npm install -g @angular/cli
             npm run build
              # Your code here
              #exit 1
