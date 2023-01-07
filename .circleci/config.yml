@@ -99,7 +99,7 @@ jobs:
       - restore_cache:
           keys:
             - backend-build
-      #- install_tsc      
+      - install_tsc      
       - run:
           name: Build Backend
           command: |
