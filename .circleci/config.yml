@@ -219,7 +219,7 @@ jobs:
             cat configure-server.yml
             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment 
-      # Here's where you will add some code to rollback on failure             
+      # Here's where you will add some code to rollback on failure #            
   # run-migrations:
   #   docker:
   #     - image: cimg/node:13.8.0
