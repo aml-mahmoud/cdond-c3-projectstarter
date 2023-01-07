@@ -39,7 +39,9 @@ commands:
             curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
             sudo apt-get install -y nodejs
             ls -la /usr/local/lib/node_modules
-            sudo chown -R $USER /usr/local/lib/node_modules/
+            whoami
+            #sudo chown -R $USER /usr/local/lib/node_modules/
+            sudo shown 1001:1001 /usr/local/lib/node_modules/
             npm install -g typescript
   install_nodejs:
     description: Install Node.js 13.8.0
