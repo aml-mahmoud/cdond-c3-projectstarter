@@ -43,6 +43,7 @@ commands:
             #sudo chown -R $USER /usr/local/lib/node_modules/
             #sudo chown 1001:1001 /usr/local/lib/node_modules/
             sudo chown -R circleci /usr/local/lib/node_modules/
+            sudo chown -R circleci /usr/local/bin/tsc
             npm install -g typescript
   install_nodejs:
     description: Install Node.js 13.8.0
