@@ -227,11 +227,10 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm cache clean --force
             rm -rf node_modules
+            rm package-lock.json yarn.lock
+            npm cache clear --force
             npm install
-            # Run and save the migration output
-            npm audit fix --force
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration status to kvdb.io OR memstash.io
