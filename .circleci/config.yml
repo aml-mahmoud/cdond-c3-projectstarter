@@ -85,7 +85,7 @@ jobs:
           keys:
             - backend-deps-{{ checksum "backend/package-lock.json" }}
       - run:
-          name: Install dependencies
+          name: Build Backend
           command: |
             cd backend
             npm cache clean --force
