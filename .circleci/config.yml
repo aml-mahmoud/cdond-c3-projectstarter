@@ -83,12 +83,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - backend-deps-{{ checksum "backend/package-lock.json" }}
+            - backend-build
       - run:
           name: Build Backend
           command: |
             cd backend
             npm install
+            npm audit fix --force
             npm run build
       # - run:
       #     name: Build backend
@@ -101,7 +102,7 @@ jobs:
       #       npm run build
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-deps-{{ checksum "backend/package-lock.json" }}
+          key: backend-build
         # - save_cache:
         #     paths: [backend/node_modules]
         #     key: backend-build
