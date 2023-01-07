@@ -88,6 +88,8 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
+            npm cache clean --force
+            rm -rf node_modules
             npm install
             npm run build
       # - run:
