@@ -228,8 +228,8 @@ jobs:
           command: |
             cd backend
             rm -rf node_modules
-            rm package-lock.json yarn.lock
             npm cache clear --force
+            npm audit fix --force
             npm install
             npm run migrations > migrations_dump.txt
       - run:
