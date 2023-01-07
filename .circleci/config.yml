@@ -36,14 +36,14 @@ commands:
       - run:
           name: install tsc
           command: |
-            curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
-            sudo apt-get install -y nodejs
-            ls -la /usr/local/lib/node_modules
-            whoami
-            #sudo chown -R $USER /usr/local/lib/node_modules/
-            #sudo chown 1001:1001 /usr/local/lib/node_modules/
-            sudo chown -R circleci /usr/local/lib/node_modules/
-            #sudo chown -R circleci ../lib/node_modules/typescript/bin/tsc
+            # curl -fsSL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+            # sudo apt-get install -y nodejs
+            # ls -la /usr/local/lib/node_modules
+            # whoami
+            # #sudo chown -R $USER /usr/local/lib/node_modules/
+            # #sudo chown 1001:1001 /usr/local/lib/node_modules/
+            # sudo chown -R circleci /usr/local/lib/node_modules/
+            # #sudo chown -R circleci ../lib/node_modules/typescript/bin/tsc
             sudo npm install -g typescript
   install_nodejs:
     description: Install Node.js 13.8.0
@@ -99,7 +99,7 @@ jobs:
       - restore_cache:
           keys:
             - backend-build
-      #- install_tsc      
+      - install_tsc      
       - run:
           name: Build Backend
           command: |
