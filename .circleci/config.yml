@@ -139,6 +139,7 @@ jobs:
             sudo npm install jest
             npm cache clean --force
             rm -rf node_modules
+            sudo npm install jest
             npm install
             npm run test 
       - notify_on_fail       
