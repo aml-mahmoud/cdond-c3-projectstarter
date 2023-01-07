@@ -88,6 +88,7 @@ jobs:
           name: Build Backend
           command: |
             cd backend
+            npm install -g typescript
             npm install
             npm audit fix --force
             npm run build
