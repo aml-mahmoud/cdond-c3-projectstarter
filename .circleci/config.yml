@@ -88,18 +88,17 @@ jobs:
           name: Install dependencies
           command: |
             cd backend
-            npm cache clean --force
-            rm -rf node_modules
             npm install
-      - run:
-          name: Build backend
-          command: |
-            cd backend
-            npm cache clean --force
-            rm -rf node_modules
-            npm install
-            npm start
             npm run build
+      # - run:
+      #     name: Build backend
+      #     command: |
+      #       cd backend
+      #       npm cache clean --force
+      #       rm -rf node_modules
+      #       npm install
+      #       npm start
+      #       npm run build
       - save_cache:
           paths: [backend/node_modules]
           key: backend-deps-{{ checksum "backend/package-lock.json" }}
