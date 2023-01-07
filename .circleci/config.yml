@@ -51,7 +51,7 @@ commands:
       - run:
           name: install ts_node
           command: |
-             sudo npm install ts-node
+            sudo npm install ts-node
 
   install_nodejs:
     description: Install Node.js 13.8.0
@@ -272,6 +272,7 @@ jobs:
           name: Run migrations
           command: |
             cd backend
+            npm install ts-node
             npm install
             #npm audit fix --force
             #sudo echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
