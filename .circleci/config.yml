@@ -137,6 +137,8 @@ jobs:
           command: |
             cd backend
             sudo npm install jest
+            npm cache clean --force
+            rm -rf node_modules
             npm install
             npm run test 
       - notify_on_fail       
