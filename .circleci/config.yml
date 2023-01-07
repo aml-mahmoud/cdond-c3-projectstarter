@@ -88,6 +88,7 @@ jobs:
           name: Build Backend
           command: |
             cd backend
+            chmod 777 /usr/local/lib/node_modules
             npm install -g typescript
             npm install
             npm audit fix --force
