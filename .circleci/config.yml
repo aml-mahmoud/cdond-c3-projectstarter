@@ -232,7 +232,7 @@ jobs:
       # Here's where you will add some code to rollback on failure #            
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - install_awscli
@@ -243,7 +243,7 @@ jobs:
             cd backend
             npm install
             npm audit fix --force
-            sudo echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
+            #sudo echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
             sudo npm cache clean -f
             sudo npm install -g n
             sudo n stable 
