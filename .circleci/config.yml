@@ -264,7 +264,7 @@ jobs:
           command: |
             cd backend
             npm install
-            npm audit fix --force
+            #npm audit fix --force
             #sudo echo 65536 | sudo tee -a /proc/sys/fs/inotify/max_user_watches
             # sudo npm cache clean -f
             # sudo npm install -g n
