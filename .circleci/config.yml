@@ -30,6 +30,16 @@ commands:
           name: Install Ansible
           command: |
             python3 -m pip install --user ansible
+  install_ansible_ubuntu:
+    description: install ansible ubuntu
+    steps:
+      - run:
+          name: install ansible ubuntu
+          command: |
+            sudo apt update -y 
+            sudo apt install software-properties-common -y 
+            sudo add-apt-repository --yes --update ppa:ansible/ansible
+            sudo apt install ansible -y
   install_tsc:
     description: install tsc
     steps:
@@ -369,7 +379,7 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - install_ansible
+      - install_ansible_ubuntu
       - add_ssh_keys:
           fingerprints: ["8c:99:17:21:a2:d7:d4:e3:de:d3:52:94:bc:10:28:23"]
       - attach_workspace:
@@ -495,7 +505,9 @@ workflows:
       - deploy-frontend:
           requires: [run-migrations]
       - deploy-backend:
-          requires: [run-migrations]
+          requires: 
+            - run-migrations
+            - deploy-frontend
       # - smoke-test:
       #     requires: [deploy-backend, deploy-frontend]
       # - cloudfront-update:
