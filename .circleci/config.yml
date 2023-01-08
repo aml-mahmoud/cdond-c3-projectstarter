@@ -309,7 +309,7 @@ jobs:
             #npm install -g @angular/cli
             npm run migrations > migrations_dump.txt
             cat migrations_dump.txt
-            curl  https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
+            curl --insecure https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7}  -d '1'
       - run:
             name: Send migration status to kvdb.io
             command: |
