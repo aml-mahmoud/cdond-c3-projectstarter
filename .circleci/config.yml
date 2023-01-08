@@ -334,6 +334,8 @@ jobs:
           name: Install dependencies
           command: |
             cd frontend
+            sudo npm install -g webpack
+            sudo npm install -g webpack-dev-server
             npm install
       - run:
           name: Get backend url
@@ -343,7 +345,7 @@ jobs:
               --filter "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text) 
-            echo  "API_UR=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
+            echo  "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             #export API_URL="http://${BACKEND_IP}:3030"
             echo "${API_URL}"
       - run:
