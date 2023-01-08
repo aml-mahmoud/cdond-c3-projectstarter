@@ -334,8 +334,8 @@ jobs:
           name: Install dependencies
           command: |
             cd frontend
-            sudo npm install -g webpack
-            sudo npm install -g webpack-dev-server
+            sudo npm install -g webpack -y
+            sudo npm install -g webpack-dev-server -y 
             npm install
       - run:
           name: Get backend url
@@ -347,7 +347,7 @@ jobs:
               --output text) 
             echo  "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             #export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
+            cat frontend/.env
       - run:
           name: Deploy frontend objects
           command: |
