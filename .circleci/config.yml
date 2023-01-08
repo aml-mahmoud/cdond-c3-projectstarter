@@ -352,6 +352,8 @@ jobs:
           name: Deploy frontend objects
           command: |
             cd frontend
+            sudo npm install -g webpack -y
+            sudo npm install -g webpack-dev-server -y 
             npm run build
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
       - destroy-environment      
