@@ -85,6 +85,8 @@ commands:
               cd ~/project/backend
               npm install
               npm run migration:revert
+            else
+              echo "didn't migrate"  
             fi          
   
   destroy-environment:
