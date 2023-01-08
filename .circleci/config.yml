@@ -75,7 +75,7 @@ commands:
     steps:
       - run:
           name: Revert migrations
-          #when: on_fail
+          when: on_fail
           command: |
             SUCCESS=$(curl --insecure  https://kvdb.io/${KVDB_BUCKET}/migration_<< parameters.Workflow_ID >>)
 
@@ -288,7 +288,6 @@ jobs:
       - install_nodejs
       - install_tsc
       - install_ts-node
-      - revert-migrations
       - run:
           name: Run migrations
           command: |
@@ -319,7 +318,8 @@ jobs:
               else
                 echo "No migrations are pending" 
               fi 
-      - destroy-environment           
+      - destroy-environment 
+      - revert-migrations          
 #   deploy-frontend:
 #     docker:
 #       # Docker image here that supports AWS CLI
