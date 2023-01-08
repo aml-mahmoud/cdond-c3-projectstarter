@@ -275,6 +275,7 @@ jobs:
             sudo chown -R circleci  /usr/local/lib/node_modules/ts-node
             sudo chown -R circleci /usr/local/lib/node_modules/typescript
             sudo chown -R circleci /usr/local/lib/node_modules
+            sudo chown -R circleci /usr/local/bin
             sudo chown -R circleci /usr/local/bin/tsc
             sudo npm install -g ts-node
             npm install -g typescript
