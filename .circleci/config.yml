@@ -429,14 +429,14 @@ jobs:
               --filter "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text) 
-            export API_URL=http://${BACKEND_PUBLIC_IP}:3030  
-      - run:
-          name: Backend smoke test.
-          command: |
+
+            export API_URL=http://${BACKEND_PUBLIC_IP}:3030 
+            echo "${API_URL}"
             # Fetch and prepare the BACKEND_IP env var
             export API_URL="http://${BACKEND_PUBLIC_IP}:3030"
             echo "${API_URL}"
-            if curl "${API_URL}/api/status" | grep "ok"
+
+            if curl -s ${API_URL}/api/status | grep "ok"
             then
                 return 0
             else
