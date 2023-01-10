@@ -397,6 +397,7 @@ jobs:
             tar -czf artifact.tar.gz dist/* package*
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files/
+            ls -lh .circleci/ansible/roles/deploy/files/
             
       - run:
           name: Deploy backend
@@ -442,7 +443,7 @@ jobs:
             echo ${URL} 
             if curl -s ${URL} | grep "Welcome"
             then
-              exit 2
+              exit 0
             else
               exit 1
             fi 
