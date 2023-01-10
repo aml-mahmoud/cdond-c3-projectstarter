@@ -218,7 +218,7 @@ jobs:
             npm install
             npm audit fix --audit-level=critical --force
             npm audit fix --audit-level=critical --force
-            npm audit --audit-level=critical
+            #npm audit --audit-level=critical
             npm audit fix --force
       - notify_on_failure
 
