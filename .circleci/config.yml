@@ -338,6 +338,8 @@ jobs:
           name: Install dependencies
           command: |
             cd frontend
+            sudo npm install -g webpack -y
+            sudo npm install -g webpack-dev-server -y 
             npm install
       - run:
           name: Get backend url
@@ -371,6 +373,7 @@ jobs:
       - install_ansible
       - install_nodejs
       - install_ts-node
+      - install_tsc
       - add_ssh_keys:
           fingerprints: ["8c:99:17:21:a2:d7:d4:e3:de:d3:52:94:bc:10:28:23"]
       - attach_workspace:
