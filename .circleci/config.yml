@@ -304,6 +304,7 @@ jobs:
           keys: [backend-build]
       - install_awscli
       - install_tsc
+      - install_ts-node
       - run:
           name: Run migrations
           command: |
