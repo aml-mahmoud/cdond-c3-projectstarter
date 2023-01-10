@@ -295,6 +295,7 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - install_awscli
+      - install_tsc
       - run:
           name: Run migrations
           command: |
