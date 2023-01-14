@@ -33,7 +33,7 @@ Please watch the [video walkthrough of setting up your secrets here](https://www
   - `AWS_DEFAULT_REGION`=(your default region in aws)
   - `TYPEORM_CONNECTION`=`postgres`
   - `TYPEORM_MIGRATIONS_DIR`=`./src/migrations`
-  - `TYPEORM_ENTITIES`=`./src/modules/domain/**/*.entity.ts`
+  - `TYPEORM_ENTITIES`=`./src/modules/**/*.entity.ts`
   - `TYPEORM_MIGRATIONS`=`./src/migrations/*.ts`
   - `TYPEORM_HOST`={your postgres database hostname in RDS}
   - `TYPEORM_PORT`=`5532` (or the port from RDS if it’s different)
@@ -89,7 +89,7 @@ In this phase, you will add CircleCI jobs that execute Cloud Formation templates
       - Configure environment variables (use the `environment` module type in your role):
         - `ENVIRONMENT`=`production`
         - `TYPEORM_CONNECTION`=`postgres`
-        - `TYPEORM_ENTITIES`=`./src/modules/domain/**/*.entity.ts`
+        - `TYPEORM_ENTITIES`=`./src/modules/**/*.entity.ts`
         - `TYPEORM_HOST`={your postgres database hostname in RDS}
         - `TYPEORM_PORT`=`5532` (or the port from RDS if it’s different)
         - `TYPEORM_USERNAME`={your postgres database username in RDS}

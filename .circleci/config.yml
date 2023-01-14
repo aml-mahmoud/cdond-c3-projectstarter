@@ -403,7 +403,7 @@ jobs:
           name: Deploy backend
           command: |
             export TYPEORM_MIGRATIONS_DIR=./src/migrations
-            export TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts
+            export TYPEORM_ENTITIES=./src/modules/**/*.entity.ts
             export TYPEORM_MIGRATIONS=./src/migrations/*.ts
             cd .circleci/ansible
             cat inventory.txt
@@ -447,8 +447,8 @@ jobs:
             else
               exit 1
             fi 
-      # - destroy-environment 
-      # - revert-migrations
+      - destroy-environment 
+      - revert-migrations
       # Here's where you will add some code to rollback on failure 
   cloudfront-update:
     docker:
