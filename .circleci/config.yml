@@ -58,12 +58,12 @@ commands:
             sudo apt install ansible -y
 # Configure Slack
 
-  notify_on_failure:
-    steps:
-      - slack/notify:
-          event: fail
-          channel: uda-final-project 
-          template: basic_fail_1
+  # notify_on_failure:
+  #   steps:
+  #     - slack/notify:
+  #         event: fail
+  #         channel: uda-final-project 
+  #         template: basic_fail_1
 
 
 # Destroy When Rollback
@@ -124,7 +124,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
 
-      - notify_on_failure
+      #- notify_on_failure
 
 # Build Backend
 
@@ -146,7 +146,7 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
 
-      - notify_on_failure
+      #- notify_on_failure
 
 # Test Frontend
 
@@ -163,7 +163,7 @@ jobs:
             cd frontend
             npm install
             npm run test
-      - notify_on_failure
+      #- notify_on_failure
 
 # Test Backend
 
@@ -181,7 +181,7 @@ jobs:
             npm install
             sudo npm install jest
             npm run test
-      - notify_on_failure
+      #- notify_on_failure
 
 # Scan Frontend
             
@@ -203,7 +203,7 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
             npm audit fix --force
-      - notify_on_failure
+      #- notify_on_failure
 
 
 # Scan Backend
@@ -224,7 +224,7 @@ jobs:
             npm audit fix --audit-level=critical --force
             #npm audit --audit-level=critical
             npm audit fix --force
-      - notify_on_failure
+      #- notify_on_failure
 
 #   deploy-infrastructure:
 #     docker:
