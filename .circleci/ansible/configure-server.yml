@@ -15,7 +15,8 @@
   pre_tasks:
     - name: Wait 300 seconds, but only start checking after 60 seconds
       ansible.builtin.wait_for_connection:
-      timeout: 300
+        delay: 60
+        timeout: 300
 
     - name: "install python for Ansible."
       apt:
