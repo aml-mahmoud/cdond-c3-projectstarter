@@ -19,8 +19,8 @@
     cd ~/backend-app/dist
     pm2 stop default
     pm2 start main.js
-  args:
-    chdir: cd ~/backend-app/dist
+  # args:
+  #   chdir: cd ~/backend-app/dist
   environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
