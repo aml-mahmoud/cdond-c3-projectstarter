@@ -128,7 +128,7 @@ jobs:
           paths: [frontend/node_modules]
           key: frontend-build
 
-      - notify_on_failure
+      #- notify_on_failure
 
 # Build Backend
 
@@ -139,7 +139,6 @@ jobs:
       - checkout
       - restore_cache:
           keys: [backend-build]
-      - install_tsc    
       - run:
           name: Build Backend
           command: |
@@ -150,7 +149,7 @@ jobs:
           paths: [backend/node_modules]
           key: backend-build
 
-      - notify_on_failure
+      #- notify_on_failure
 
 # Test Frontend
 
@@ -167,7 +166,7 @@ jobs:
             cd frontend
             npm install
             npm run test
-      - notify_on_failure
+      #- notify_on_failure
 
 # Test Backend
 
@@ -183,9 +182,8 @@ jobs:
           command: |
             cd backend
             npm install
-            sudo npm install jest
             npm run test
-      - notify_on_failure
+      #- notify_on_failure
 
 # Scan Frontend
             
@@ -207,7 +205,7 @@ jobs:
             npm audit fix --force
             npm audit --audit-level=critical
             npm audit fix --force
-      - notify_on_failure
+      #- notify_on_failure
 
 
 # Scan Backend
@@ -228,7 +226,7 @@ jobs:
             npm audit fix --audit-level=critical --force
             #npm audit --audit-level=critical
             npm audit fix --force
-      - notify_on_failure
+      #- notify_on_failure
 
 # Deploy Infrastructure
 
@@ -303,10 +301,6 @@ jobs:
       - restore_cache:
           keys: [backend-build]
       - install_awscli
-      - install_tsc
-      - install_ts-node
-      - restore_cache:
-          keys: [backend-deps]
       - run:
           name: Run migrations
           command: |
@@ -336,15 +330,10 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
-      - restore_cache:
-          keys: [frontend-build]
       - run:
           name: Install dependencies
           command: |
             cd frontend
-            sudo npm install -g webpack -y
-            sudo npm install -g webpack-dev-server -y 
-            sudo npm install -D webpack-cli -y 
             npm install
       - run:
           name: Get backend url
@@ -359,9 +348,6 @@ jobs:
           name: Deploy frontend objects
           command: |
             cd frontend
-            sudo npm install -g webpack -y
-            sudo npm install -g webpack-dev-server -y 
-            sudo npm install -D webpack-cli -y 
             npm install
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
@@ -380,8 +366,7 @@ jobs:
       - install_awscli
       - install_ansible
       - install_nodejs
-      - install_ts-node
-      - install_tsc
+      #- install_tsc
       - add_ssh_keys:
           fingerprints: ["8c:99:17:21:a2:d7:d4:e3:de:d3:52:94:bc:10:28:23"]
       - attach_workspace:
@@ -401,7 +386,6 @@ jobs:
             tar -czf artifact.tar.gz dist/* package*
             cd ..
             cp backend/artifact.tar.gz .circleci/ansible/roles/deploy/files/
-            ls -lh .circleci/ansible/roles/deploy/files/
             
       - run:
           name: Deploy backend
@@ -409,12 +393,11 @@ jobs:
             export TYPEORM_MIGRATIONS_DIR=./migrations
             export TYPEORM_ENTITIES=./modules/domain/**/*.entity{.ts,.js}
             export TYPEORM_MIGRATIONS=./migrations/*.ts
-
             cd .circleci/ansible
             cat inventory.txt
             ansible-playbook -i inventory.txt deploy-backend.yml
       - destroy-environment
-      - revert-migrations      
+      - revert-migrations   
           
 
 # Smoke Test
