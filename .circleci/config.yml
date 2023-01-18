@@ -305,6 +305,8 @@ jobs:
       - install_awscli
       - install_tsc
       - install_ts-node
+      - restore_cache:
+          keys: [backend-deps]
       - run:
           name: Run migrations
           command: |
@@ -334,6 +336,8 @@ jobs:
       - checkout
       - install_awscli
       - install_nodejs
+      - restore_cache:
+          keys: [frontend-build]
       - run:
           name: Install dependencies
           command: |
