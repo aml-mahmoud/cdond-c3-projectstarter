@@ -63,7 +63,7 @@ describe('Employee Controller', () => {
     it('should dispatch change employee name command', async () => {
       // Arrange
       const request = {
-        employeeId: 100,
+        employeeId: 101,
         firstName: 'Jimmy',
         lastName: 'Ramos',
         middleName: 'Josue',
