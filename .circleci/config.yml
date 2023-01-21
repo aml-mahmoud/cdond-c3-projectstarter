@@ -202,9 +202,9 @@ jobs:
             npm update loader-utils --depth 2
             npm update minimist --depth 4
             npm audit fix --audit-level=critical --force
-            #npm audit fix --force
+            npm audit fix --force
             npm audit --audit-level=critical
-            #npm audit fix --force
+            npm audit fix --force
       #- notify_on_failure
 
 
@@ -222,8 +222,8 @@ jobs:
           command: |
             cd backend
             npm install
-            # npm audit fix --audit-level=critical --force
-            # npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical --force
+            npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
             npm audit fix --force
       #- notify_on_failure
