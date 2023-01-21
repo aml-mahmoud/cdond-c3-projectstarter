@@ -152,7 +152,7 @@ TYPEORM_USERNAME=postgres
 TYPEORM_PASSWORD=password
 TYPEORM_DATABASE=glee2
 TYPEORM_MIGRATIONS=./src/migrations/*.ts
-TYPEORM_ENTITIES=./src/modules/domain/**/*.entity.ts
+TYPEORM_ENTITIES=./src/modules/**/*.entity.ts
 ```
 
 ## Migrations for CI/CD Review Apps
